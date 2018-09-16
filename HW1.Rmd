@@ -15,14 +15,24 @@ rand_samp
 
 rand_samp
 
-A logical vector indicating whether elements of the sample are greater than 2
-A (length-10) character vector
-A (length-10) factor vector
+Below is a logical vector indicating whether elements of the sample are greater than 2.
+
+```{r random_sample, echo=FALSE}
+
+log_vec <- c(rand_samp)
+log_vec > 2
+```
+
+Below is a (length-10) character vector
+
+Below is a (length-10) factor vector
+
+Below is the mean of each variable in my dataframe.
+
+
 Try to take the mean of each variable in your dataframe. What works and what doesn’t? Why?
 
 In some cases, you can explicitly convert variables from one type to another. Write a code chunk that applies the as.numeric function to the logical, character, and factor variables (please show this chunk but not the output). What happens? In a second code chunk, convert your character variable from character to factor to numeric; similarly, convert your factor variable from factor to character to numeric. What happens?
-
-
 
 ```{r cars}
 summary(cars)
