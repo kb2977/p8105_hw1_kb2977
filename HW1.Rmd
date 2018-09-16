@@ -13,22 +13,47 @@ rand_samp <- runif(10, min = 0, max = 5)
 rand_samp
 ```
 
-rand_samp
-
 Below is a logical vector indicating whether elements of the sample are greater than 2.
 
-```{r random_sample, echo=FALSE}
+```{r logical_vec, echo=FALSE}
 
 log_vec <- c(rand_samp)
-log_vec > 2
+new_log_vec <- c(log_vec > 2)
+new_log_vec
 ```
 
-Below is a (length-10) character vector
+Below is a (length-10) character vector.
+```{r char_vec, echo=FALSE}
 
-Below is a (length-10) factor vector
+char_vec <- c(LETTERS[1:10])
+char_vec
+```
+
+Below is a (length-10) factor vector.
+
+```{r fac_vec, echo=FALSE}
+
+fac_vec <- factor(c(LETTERS[1:10]))
+fac_vec
+```
+
+Below is a dataframe containin all four vectors.
+
+```{r, echo=FALSE}
+
+df=data.frame(rand_samp,new_log_vec, char_vec, fac_vec)
+df
+```
 
 Below is the mean of each variable in my dataframe.
 
+```{r}
+
+mean(rand_samp)
+mean(new_log_vec)
+mean(char_vec)
+mean(fac_vec)
+```
 
 Try to take the mean of each variable in your dataframe. What works and what doesn’t? Why?
 
