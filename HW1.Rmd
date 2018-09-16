@@ -3,15 +3,26 @@ title: "HW1"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+#Problem 1
+
+Below is a random sample of size 10 from a uniform[0, 5] distribution.
+
+```{r random_sample, echo=FALSE}
+
+rand_samp <- runif(10, min = 0, max = 5)
+rand_samp
 ```
 
-## R Markdown
+rand_samp
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+A logical vector indicating whether elements of the sample are greater than 2
+A (length-10) character vector
+A (length-10) factor vector
+Try to take the mean of each variable in your dataframe. What works and what doesn’t? Why?
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+In some cases, you can explicitly convert variables from one type to another. Write a code chunk that applies the as.numeric function to the logical, character, and factor variables (please show this chunk but not the output). What happens? In a second code chunk, convert your character variable from character to factor to numeric; similarly, convert your factor variable from factor to character to numeric. What happens?
+
+
 
 ```{r cars}
 summary(cars)
