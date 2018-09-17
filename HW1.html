@@ -128,10 +128,9 @@ $(document).ready(function () {
 <div id="problem-1" class="section level1">
 <h1>Problem 1</h1>
 <p>Below is a random sample of size 10 from a uniform[0, 5] distribution.</p>
-<pre><code>##  [1] 2.5326715 4.3149864 3.7259817 1.4207440 3.4741399 0.3771149 3.5175758
-##  [8] 2.8138590 3.8237768 2.0127628</code></pre>
+<pre class="r"><code>rand_samp &lt;- runif(10, min = 0, max = 5)</code></pre>
 <p>Below is a logical vector indicating whether elements of the sample are greater than 2.</p>
-<pre><code>##  [1]  TRUE  TRUE  TRUE FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE</code></pre>
+<pre><code>##  [1]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE  TRUE  TRUE</code></pre>
 <p>Below is a (length-10) character vector.</p>
 <pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot;</code></pre>
 <p>Below is a (length-10) factor vector.</p>
@@ -139,19 +138,19 @@ $(document).ready(function () {
 ## Levels: A B C D E F G H I J</code></pre>
 <p>Below is a dataframe containin all four vectors.</p>
 <pre><code>##    rand_samp new_log_vec char_vec fac_vec
-## 1  2.5326715        TRUE        A       A
-## 2  4.3149864        TRUE        B       B
-## 3  3.7259817        TRUE        C       C
-## 4  1.4207440       FALSE        D       D
-## 5  3.4741399        TRUE        E       E
-## 6  0.3771149       FALSE        F       F
-## 7  3.5175758        TRUE        G       G
-## 8  2.8138590        TRUE        H       H
-## 9  3.8237768        TRUE        I       I
-## 10 2.0127628        TRUE        J       J</code></pre>
+## 1  4.6219257        TRUE        A       A
+## 2  0.1025338       FALSE        B       B
+## 3  1.8151174       FALSE        C       C
+## 4  0.2755820       FALSE        D       D
+## 5  1.0076202       FALSE        E       E
+## 6  3.4011982        TRUE        F       F
+## 7  0.1055996       FALSE        G       G
+## 8  1.8447562       FALSE        H       H
+## 9  3.8054512        TRUE        I       I
+## 10 4.3967774        TRUE        J       J</code></pre>
 <p>Below is the mean of each variable in my dataframe.</p>
-<pre><code>## [1] 2.801361</code></pre>
-<pre><code>## [1] 0.8</code></pre>
+<pre><code>## [1] 2.137656</code></pre>
+<pre><code>## [1] 0.4</code></pre>
 <pre><code>## [1] NA</code></pre>
 <pre><code>## [1] NA</code></pre>
 <p>After taking the mean of each variable in my dataframe, it is evident that mean_rand_samp and mean_log_vec works because the arguments are numeric whereas mean_char_vec and mean_fac_vec are not.</p>
@@ -160,8 +159,8 @@ $(document).ready(function () {
 as.numeric(new_log_vec)
 as.numeric(char_vec)
 as.numeric(fac_vec)</code></pre>
-<p>It is not possible to convert a character variable to a numeric vector which is why the output is NA for “as.numeric(char_vec)”.</p>
-<p>In this code chunck, the character variable (char_vec) is converted from character to factor to numeric; similarly, convert my factor variable (fac_vec) is converted from factor to character to numeric.</p>
+<p>It is not possible to convert a character variable to a numeric vector which is why the output is NA for “as.numeric(char_vec)”. It is possible to convert a factor vector to a numeric vector because the factor vector assigns an integer to every unique level of a factor vector.</p>
+<p>In this code chunk, the character variable (char_vec) is converted from character to factor to numeric; similarly, convert my factor variable (fac_vec) is converted from factor to character to numeric.</p>
 <pre class="r"><code>x &lt;- as.factor(char_vec)
 as.numeric(x)</code></pre>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
