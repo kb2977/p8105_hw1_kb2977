@@ -5,11 +5,13 @@ output: html_document
 
 #Problem 1
 
-```{r vector_df}
+Below is a dataframe containing four different vectors:
+
+```{r prob1_df}
 
 library(tidyverse)
 
-vector_df = tibble(
+prob1_df = tibble(
   rand_samp <- runif(10, min = 0, max = 5),
   log_vec <- c(rand_samp > 2),
   char_vec <- c(LETTERS[1:10]),
@@ -35,7 +37,6 @@ Below is a (length-10) character vector.
 ```{r char_vec}
 
 char_vec <- c(LETTERS[1:10])
-char_vec
 ```
 
 Below is a (length-10) factor vector.
@@ -43,30 +44,23 @@ Below is a (length-10) factor vector.
 ```{r fac_vec}
 
 fac_vec <- factor(c(LETTERS[1:10]))
-fac_vec
 ```
 
 Below is a dataframe containin all four vectors.
 
 ```{r dataframe}
 
-df <- data.frame(rand_samp,new_log_vec, char_vec, fac_vec)
-df
+df <- data.frame(rand_samp, log_vec, char_vec, fac_vec)
 ```
 
-Below is the mean of each variable in my dataframe.
+Below is the mean of each variable in the dataframe.
 
-```{r means, echo = FALSE, warning = FALSE}
+```{r means}
 
 mean_rand_samp <- mean(rand_samp)
 mean_log_vec <- mean(log_vec)
 mean_char_vec <- mean(char_vec)
 mean_fac_vec <- mean(fac_vec)
-
-mean_rand_samp
-mean_log_vec
-mean_char_vec
-mean_fac_vec
 ```
 
 After taking the mean of each variable in my dataframe, it is evident that mean_rand_samp and mean_log_vec works because the arguments are numeric whereas mean_char_vec and mean_fac_vec are not.
@@ -80,19 +74,41 @@ as.numeric(new_log_vec)
 as.numeric(char_vec)
 as.numeric(fac_vec)
 ```
+
 It is not possible to convert a character variable to a numeric vector which is why the output is NA for "as.numeric(char_vec)". It is possible to convert a factor vector to a numeric vector because the factor vector are categorical variables that assigns an integer to every unique level of a factor vector.
 
 In this code chunk, the character variable (char_vec) is converted from character to factor to numeric; similarly, convert my factor variable (fac_vec) is converted from factor to character to numeric.
 
-```{r converting_other}
+```{r converting_char_fac}
 
-x <- as.factor(char_vec)
-as.numeric(x)
+char_to_fac <- as.factor(char_vec)
+as.numeric(char_to_fac)
 
-y <- as.character(fac_vec)
-as.numeric(y)
+fac_to_char <- as.character(fac_vec)
+as.numeric(fac_to_char)
 ```
 
 It is possible to convert a character vector to a factor vector to a numeric vector but it is not possible to convert a factor vector to a character vector to a numeric vector.
 
 #Problem 2
+
+Below is a dataframe for Problem 2:
+
+```{r prob2_df}
+
+library(tidyverse)
+
+prob2_df = tibble(
+  x <- rnorm(1000),
+  y <- rnorm(1000),
+  log_vec <- (x + y > 0),
+  num_vec <- as.numeric(log_vec),
+  fac_vec <- as.factor(num_vec)
+)
+```
+
+Write a short description of your vector using inline R code, including: * the size of the dataset * the mean and median of x * the proportion of cases for which the logical vector is TRUE
+
+Make a scatterplot of y vs x; color points using the logical variable (adding color = ... inside of aes in your ggplot code should help). Make a second and third scatterplot that color points using the numeric and factor variables, respectively, and comment on the color scales.
+
+Export your first scatterplot to your project directory using ggsave.

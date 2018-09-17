@@ -1,3 +1,3 @@
 # p8105_hw1_kb2977
 
-Updating my ReadMe
+This project is for HW1 that consists of two problems.
