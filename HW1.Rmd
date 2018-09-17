@@ -1,9 +1,12 @@
 ---
-title: "HW1"
+title: "Homework 1"
 output: html_document
 ---
 
-#Problem 1
+#Sept 21, 2018
+#Francois Ban
+
+##Problem 1
 
 Below is a dataframe containing four different vectors:
 
@@ -46,14 +49,14 @@ Below is a (length-10) factor vector.
 fac_vec <- factor(c(LETTERS[1:10]))
 ```
 
-Below is a dataframe containin all four vectors.
+Below is a dataframe containing all four vectors.
 
 ```{r dataframe}
 
 df <- data.frame(rand_samp, log_vec, char_vec, fac_vec)
 ```
 
-Below is the mean of each variable in the dataframe.
+Below is the mean of each variable in the dataframe (prob1_df).
 
 ```{r means}
 
@@ -67,10 +70,10 @@ After taking the mean of each variable in my dataframe, it is evident that mean_
 
 Bellow is a code chunk that applies the as.numeric function to the logical, character, and factor variables.
 
-```{r converting_to_num, eval = FALSE}
+```{r convert_to_num, eval = FALSE}
 
 as.numeric(rand_samp)
-as.numeric(new_log_vec)
+as.numeric(log_vec)
 as.numeric(char_vec)
 as.numeric(fac_vec)
 ```
@@ -79,7 +82,7 @@ It is not possible to convert a character variable to a numeric vector which is 
 
 In this code chunk, the character variable (char_vec) is converted from character to factor to numeric; similarly, convert my factor variable (fac_vec) is converted from factor to character to numeric.
 
-```{r converting_char_fac}
+```{r convert_char_fac}
 
 char_to_fac <- as.factor(char_vec)
 as.numeric(char_to_fac)
@@ -90,10 +93,10 @@ as.numeric(fac_to_char)
 
 It is possible to convert a character vector to a factor vector to a numeric vector but it is not possible to convert a factor vector to a character vector to a numeric vector.
 
-#Problem 2
+##Problem 2
 
 Below is a dataframe for Problem 2:
-
+  
 ```{r prob2_df}
 
 library(tidyverse)
@@ -109,14 +112,34 @@ prob2_df = tibble(
 
 Write a short description of your vector using inline R code, including: * the size of the dataset * the mean and median of x * the proportion of cases for which the logical vector is TRUE
 
-Below is a scatterplot of y vs. x:
-
-```{r scaterplot}
+Below is a scatterplot of x and y that colors the points based on the logical variable:
+  
+```{r sp_log_vec}
 
 ggplot(prob2_df, aes(x = x, y = y)) +
   geom_point(aes(color = log_vec))
 ```
+The red points are the x and y values that do not meet the log_vec statement (FALSE) whereas the blue points are the x and y values that do meet the log_vec statement (TRUE).
 
-Make a scatterplot of y vs x; color points using the logical variable (adding color = ... inside of aes in your ggplot code should help). Make a second and third scatterplot that color points using the numeric and factor variables, respectively, and comment on the color scales.
+Below is a scatterplot of x and y that colors the points based on the numeric variable:
+  
+```{r sp_num_vec}
 
-Export your first scatterplot to your project directory using ggsave.
+ggplot(prob2_df, aes(x = x, y = y)) +
+  geom_point(aes(color = num_vec))
+```
+The dark blue points represent the points when num_vec = 0 (FALSE) and the light blue point represent the values in which num_vec = 1 (TRUE).
+
+Below is a scatterplot of x and y that colors the points based on the factor variable: 
+  
+```{r sp_fac_vec}
+
+ggplot(prob2_df, aes(x = x, y = y)) +
+  geom_point(aes(color = fac_vec))
+```
+The blue points represent when fac_vec = 1 and the red points represent when fac_vec = 0. This scale is different from the numeric scatterplot (sp_num_vec) because there are only a set of values that fac_vec can take (in this case, 0 or 1) whereas there are an infinite number of values that a numeric vector can take.
+
+Exporting the first scatterplot (sp_log_vec) to your project directory.
+
+`ggsave("scatter_plot.pdf", height = 4, width = 6)`
+
