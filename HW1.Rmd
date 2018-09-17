@@ -109,6 +109,14 @@ prob2_df = tibble(
 
 Write a short description of your vector using inline R code, including: * the size of the dataset * the mean and median of x * the proportion of cases for which the logical vector is TRUE
 
+Below is a scatterplot of y vs. x:
+
+```{r scaterplot}
+
+ggplot(prob2_df, aes(x = x, y = y)) +
+  geom_point(aes(color = log_vec))
+```
+
 Make a scatterplot of y vs x; color points using the logical variable (adding color = ... inside of aes in your ggplot code should help). Make a second and third scatterplot that color points using the numeric and factor variables, respectively, and comment on the color scales.
 
 Export your first scatterplot to your project directory using ggsave.
