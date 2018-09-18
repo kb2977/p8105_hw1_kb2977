@@ -1,6 +1,6 @@
 ---
 title: "Homework 1"
-output: html_document
+output: github_document
 ---
 
 #Sept 21, 2018
@@ -16,12 +16,16 @@ library(tidyverse)
 
 prob1_df = tibble(
   rand_samp <- runif(10, min = 0, max = 5),
-  log_vec <- c(rand_samp > 2),
-  char_vec <- c(LETTERS[1:10]),
-  fac_vec <- factor(c(LETTERS[1:10]))
+  log_vec <- rand_samp > 2,
+  char_vec <- LETTERS[1:10],
+  fac_vec <- factor(LETTERS[1:10])
 )
 ```
 
+#Whats the diff?
+  char_vec <- c(LETTERS[1:10]),
+  fac_vec <- factor(c(LETTERS[1:10]))
+  
 Below is a random sample of size 10 from a uniform[0, 5] distribution.
 
 ```{r random_sample}
