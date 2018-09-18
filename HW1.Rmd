@@ -8,11 +8,13 @@ output: github_document
 
 ###Problem 1
 
+```{r loading_tidyverse, include = FALSE}
+library(tidyverse)
+```
+
 Below is a dataframe containing four different vectors:
 
 ```{r prob1_df}
-library(tidyverse)
-
 prob1_df = tibble(
   rand_samp = runif(10, min = 0, max = 5),
   log_vec = rand_samp > 2,
@@ -103,7 +105,7 @@ Below is a scatterplot of x and y that colors the points based on the factor var
 ```{r sp_fac_vec}
 
 plot_3 = ggplot(prob2_df, aes(x = x, y = y)) +
-  geom_point(aes(color = prob2_df$fac_vec))
+  geom_point(aes(color = prob2_df$fac_vec,))
 plot_3
 ```
 The blue points represent when fac_vec = TRUE and the red points represent when fac_vec = FALSE. This scale is different from the numeric scatterplot (sp_num_vec) because there are only a set of values that fac_vec can take (in this case, TRUE or FALSE) whereas there are an infinite number of values that a numeric vector can take.

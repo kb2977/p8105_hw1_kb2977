@@ -12,21 +12,6 @@ Francois Ban
 Below is a dataframe containing four different vectors:
 
 ``` r
-library(tidyverse)
-```
-
-    ## ── Attaching packages ───────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──
-
-    ## ✔ ggplot2 3.0.0     ✔ purrr   0.2.5
-    ## ✔ tibble  1.4.2     ✔ dplyr   0.7.6
-    ## ✔ tidyr   0.8.1     ✔ stringr 1.3.1
-    ## ✔ readr   1.1.1     ✔ forcats 0.3.0
-
-    ## ── Conflicts ──────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-    ## ✖ dplyr::filter() masks stats::filter()
-    ## ✖ dplyr::lag()    masks stats::lag()
-
-``` r
 prob1_df = tibble(
   rand_samp = runif(10, min = 0, max = 5),
   log_vec = rand_samp > 2,
@@ -102,7 +87,7 @@ prob2_df = tibble(
 )
 ```
 
-My factor vector created above has 1000, a mean of 7.859203610^{-4}, a median of `median(prob2_df$x)`, and a proportion of cases 0.506.
+My factor vector created above has 1000, a mean of 0.0569008, a median of `median(prob2_df$x)`, and a proportion of cases 0.531.
 
 Below is a scatterplot of x and y that colors the points based on the logical variable:
 
@@ -130,7 +115,7 @@ Below is a scatterplot of x and y that colors the points based on the factor var
 
 ``` r
 plot_3 = ggplot(prob2_df, aes(x = x, y = y)) +
-  geom_point(aes(color = prob2_df$fac_vec))
+  geom_point(aes(color = prob2_df$fac_vec,))
 plot_3
 ```
 
