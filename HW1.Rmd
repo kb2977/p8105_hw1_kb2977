@@ -7,15 +7,11 @@ output: github_document
 #Francois Ban
 
 ##Problem 1
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-
-library(tidyverse)
-```
 
 Below is a dataframe containing four different vectors:
 
 ```{r prob1_df}
+library(tidyverse)
 
 prob1_df = tibble(
   rand_samp = runif(10, min = 0, max = 5),
@@ -73,42 +69,45 @@ library(tidyverse)
 prob2_df = tibble(
   x = rnorm(1000),
   y = rnorm(1000),
-  log_vec2 = (x + y > 0),
-  num_vec2 = as.numeric(log_vec2),
-  fac_vec2 = as.factor(num_vec2)
+  log_vec = (x + y > 0),
+  num_vec = as.numeric(log_vec),
+  fac_vec = as.factor(log_vec)
 )
 ```
 
-My factor vector created above has `r length(prob2_df$fac_vec2)`, a mean of `r mean(prob2_df$x)`, a median of `median(prob2_df$x)`, and a proportion of cases `r mean(prob2_df$log_vec2)`.
+My factor vector created above has `r length(prob2_df$fac_vec)`, a mean of `r mean(prob2_df$x)`, a median of `median(prob2_df$x)`, and a proportion of cases `r mean(prob2_df$log_vec)`.
 
 Below is a scatterplot of x and y that colors the points based on the logical variable:
   
 ```{r sp_log_vec}
 
-ggplot(prob2_df, aes(x = x, y = y)) +
-  geom_point(aes(color = prob2_df$log_vec2))
+plot_1 = ggplot(prob2_df, aes(x = x, y = y)) +
+  geom_point(aes(color = prob2_df$log_vec))
+plot_1
 ```
 
-The red points are the x and y values that do not meet the log_vec2 statement (FALSE) whereas the blue points are the x and y values that do meet the log_vec2 statement (TRUE).
+The red points are the x and y values that do not meet the log_vec statement (FALSE) whereas the blue points are the x and y values that do meet the log_vec statement (TRUE).
 
 Below is a scatterplot of x and y that colors the points based on the numeric variable:
   
 ```{r sp_num_vec}
 
-ggplot(prob2_df, aes(x = x, y = y)) +
-  geom_point(aes(color = prob2_df$num_vec2))
+plot_2 = ggplot(prob2_df, aes(x = x, y = y)) +
+  geom_point(aes(color = prob2_df$num_vec))
+plot_2
 ```
-The dark blue points represent the points when num_vec2 = 0 (FALSE) and the light blue point represent the values in which num_vec2 = 1 (TRUE).
+The dark blue points represent the points when num_vec = 0 (FALSE) and the light blue point represent the values in which num_vec = 1 (TRUE).
 
 Below is a scatterplot of x and y that colors the points based on the factor variable: 
   
 ```{r sp_fac_vec}
 
-ggplot(prob2_df, aes(x = x, y = y)) +
-  geom_point(aes(color = prob2_df$fac_vec2))
+plot_3 = ggplot(prob2_df, aes(x = x, y = y)) +
+  geom_point(aes(color = prob2_df$fac_vec))
+plot_3
 ```
-The blue points represent when fac_vec2 = 1 and the red points represent when fac_vec2 = 0. This scale is different from the numeric scatterplot (sp_num_vec) because there are only a set of values that fac_vec can take (in this case, 0 or 1) whereas there are an infinite number of values that a numeric vector can take.
+The blue points represent when fac_vec = TRUE and the red points represent when fac_vec = FALSE. This scale is different from the numeric scatterplot (sp_num_vec) because there are only a set of values that fac_vec can take (in this case, TRUE or FALSE) whereas there are an infinite number of values that a numeric vector can take.
 
 Exporting the first scatterplot (sp_log_vec) to my project directory.
-#HOW DOES THIS KNOW TO DO THE FIRST SCATTER PLOT?
-`ggsave("scatterplot_log_vec.pdf", height = 4, width = 6)`
+
+`ggsave("scatterplot_log_vec.pdf", plot = plot_1, height = 4, width = 6)`

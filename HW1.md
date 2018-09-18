@@ -13,6 +13,21 @@ Problem 1
 Below is a dataframe containing four different vectors:
 
 ``` r
+library(tidyverse)
+```
+
+    ## ── Attaching packages ───────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──
+
+    ## ✔ ggplot2 3.0.0     ✔ purrr   0.2.5
+    ## ✔ tibble  1.4.2     ✔ dplyr   0.7.6
+    ## ✔ tidyr   0.8.1     ✔ stringr 1.3.1
+    ## ✔ readr   1.1.1     ✔ forcats 0.3.0
+
+    ## ── Conflicts ──────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ✖ dplyr::filter() masks stats::filter()
+    ## ✖ dplyr::lag()    masks stats::lag()
+
+``` r
 prob1_df = tibble(
   rand_samp = runif(10, min = 0, max = 5),
   log_vec = rand_samp > 2,
@@ -83,41 +98,46 @@ library(tidyverse)
 prob2_df = tibble(
   x = rnorm(1000),
   y = rnorm(1000),
-  log_vec2 = (x + y > 0),
-  num_vec2 = as.numeric(log_vec2),
-  fac_vec2 = as.factor(num_vec2)
+  log_vec = (x + y > 0),
+  num_vec = as.numeric(log_vec),
+  fac_vec = as.factor(log_vec)
 )
 ```
 
-My factor vector created above has 1000, a mean of -0.013491, a median of `median(prob2_df$x)`, and a proportion of cases 0.501.
+My factor vector created above has 1000, a mean of -0.0192914, a median of `median(prob2_df$x)`, and a proportion of cases 0.482.
 
 Below is a scatterplot of x and y that colors the points based on the logical variable:
 
 ``` r
-ggplot(prob2_df, aes(x = x, y = y)) +
-  geom_point(aes(color = prob2_df$log_vec2))
+plot_1 = ggplot(prob2_df, aes(x = x, y = y)) +
+  geom_point(aes(color = prob2_df$log_vec))
+plot_1
 ```
 
 ![](HW1_files/figure-markdown_github/sp_log_vec-1.png)
 
-The red points are the x and y values that do not meet the log\_vec2 statement (FALSE) whereas the blue points are the x and y values that do meet the log\_vec2 statement (TRUE).
+The red points are the x and y values that do not meet the log\_vec statement (FALSE) whereas the blue points are the x and y values that do meet the log\_vec statement (TRUE).
 
 Below is a scatterplot of x and y that colors the points based on the numeric variable:
 
 ``` r
-ggplot(prob2_df, aes(x = x, y = y)) +
-  geom_point(aes(color = prob2_df$num_vec2))
+plot_2 = ggplot(prob2_df, aes(x = x, y = y)) +
+  geom_point(aes(color = prob2_df$num_vec))
+plot_2
 ```
 
-![](HW1_files/figure-markdown_github/sp_num_vec-1.png) The dark blue points represent the points when num\_vec2 = 0 (FALSE) and the light blue point represent the values in which num\_vec2 = 1 (TRUE).
+![](HW1_files/figure-markdown_github/sp_num_vec-1.png) The dark blue points represent the points when num\_vec = 0 (FALSE) and the light blue point represent the values in which num\_vec = 1 (TRUE).
 
 Below is a scatterplot of x and y that colors the points based on the factor variable:
 
 ``` r
-ggplot(prob2_df, aes(x = x, y = y)) +
-  geom_point(aes(color = prob2_df$fac_vec2))
+plot_3 = ggplot(prob2_df, aes(x = x, y = y)) +
+  geom_point(aes(color = prob2_df$fac_vec))
+plot_3
 ```
 
-![](HW1_files/figure-markdown_github/sp_fac_vec-1.png) The blue points represent when fac\_vec2 = 1 and the red points represent when fac\_vec2 = 0. This scale is different from the numeric scatterplot (sp\_num\_vec) because there are only a set of values that fac\_vec can take (in this case, 0 or 1) whereas there are an infinite number of values that a numeric vector can take.
+![](HW1_files/figure-markdown_github/sp_fac_vec-1.png) The blue points represent when fac\_vec = TRUE and the red points represent when fac\_vec = FALSE. This scale is different from the numeric scatterplot (sp\_num\_vec) because there are only a set of values that fac\_vec can take (in this case, TRUE or FALSE) whereas there are an infinite number of values that a numeric vector can take.
 
-Exporting the first scatterplot (sp\_log\_vec) to my project directory. \#HOW DOES THIS KNOW TO DO THE FIRST SCATTER PLOT? `ggsave("scatterplot_log_vec.pdf", height = 4, width = 6)`
+Exporting the first scatterplot (sp\_log\_vec) to my project directory.
+
+`ggsave("scatterplot_log_vec.pdf", plot = plot_1, height = 4, width = 6)`
