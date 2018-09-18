@@ -3,10 +3,10 @@ title: "Homework 1"
 output: github_document
 ---
 
-#Sept 21, 2018
-#Francois Ban
+##Sept 21, 2018
+##Francois Ban
 
-##Problem 1
+###Problem 1
 
 Below is a dataframe containing four different vectors:
 
@@ -58,7 +58,7 @@ as.numeric(fac_to_char)
 
 It is possible to convert a character vector to a factor vector to a numeric vector but it is not possible to convert a factor vector to a character vector to a numeric vector.
 
-##Problem 2
+###Problem 2
 
 Below is a dataframe for Problem 2:
   
@@ -110,4 +110,6 @@ The blue points represent when fac_vec = TRUE and the red points represent when 
 
 Exporting the first scatterplot (sp_log_vec) to my project directory.
 
-`ggsave("scatterplot_log_vec.pdf", plot = plot_1, height = 4, width = 6)`
+```{r}
+ggsave("scatterplot_log_vec.pdf", plot = plot_1, height = 4, width = 6)
+```

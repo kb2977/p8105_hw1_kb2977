@@ -2,13 +2,12 @@ Homework 1
 ================
 
 Sept 21, 2018
-=============
+-------------
 
 Francois Ban
-============
+------------
 
-Problem 1
----------
+### Problem 1
 
 Below is a dataframe containing four different vectors:
 
@@ -87,8 +86,7 @@ as.numeric(fac_to_char)
 
 It is possible to convert a character vector to a factor vector to a numeric vector but it is not possible to convert a factor vector to a character vector to a numeric vector.
 
-Problem 2
----------
+### Problem 2
 
 Below is a dataframe for Problem 2:
 
@@ -104,7 +102,7 @@ prob2_df = tibble(
 )
 ```
 
-My factor vector created above has 1000, a mean of -0.0192914, a median of `median(prob2_df$x)`, and a proportion of cases 0.482.
+My factor vector created above has 1000, a mean of 7.859203610^{-4}, a median of `median(prob2_df$x)`, and a proportion of cases 0.506.
 
 Below is a scatterplot of x and y that colors the points based on the logical variable:
 
@@ -140,4 +138,6 @@ plot_3
 
 Exporting the first scatterplot (sp\_log\_vec) to my project directory.
 
-`ggsave("scatterplot_log_vec.pdf", plot = plot_1, height = 4, width = 6)`
+``` r
+ggsave("scatterplot_log_vec.pdf", plot = plot_1, height = 4, width = 6)
+```
