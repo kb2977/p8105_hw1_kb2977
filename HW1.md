@@ -87,7 +87,7 @@ prob2_df = tibble(
 )
 ```
 
-My factor vector created above has 1000, a mean of 0.0569008, a median of `median(prob2_df$x)`, and a proportion of cases 0.531.
+My factor vector created above has 1000, a mean of 0.0158068, a median of `median(prob2_df$x)`, and a proportion of cases 0.494.
 
 Below is a scatterplot of x and y that colors the points based on the logical variable:
 
