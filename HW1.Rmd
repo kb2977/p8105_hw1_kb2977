@@ -7,67 +7,32 @@ output: github_document
 #Francois Ban
 
 ##Problem 1
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+```
 
 Below is a dataframe containing four different vectors:
 
 ```{r prob1_df}
 
-library(tidyverse)
-
 prob1_df = tibble(
-  rand_samp <- runif(10, min = 0, max = 5),
-  log_vec <- rand_samp > 2,
-  char_vec <- LETTERS[1:10],
-  fac_vec <- factor(LETTERS[1:10])
+  rand_samp = runif(10, min = 0, max = 5),
+  log_vec = rand_samp > 2,
+  char_vec = LETTERS[1:10],
+  fac_vec = factor(LETTERS[1:10])
 )
 ```
-
-#Whats the diff?
-  char_vec <- c(LETTERS[1:10]),
-  fac_vec <- factor(c(LETTERS[1:10]))
   
-Below is a random sample of size 10 from a uniform[0, 5] distribution.
-
-```{r random_sample}
-
-rand_samp <- runif(10, min = 0, max = 5)
-```
-
-Below is a logical vector indicating whether elements of the sample are greater than 2.
-
-```{r logical_vec}
-
-log_vec <- c(rand_samp > 2)
-```
-
-Below is a (length-10) character vector.
-```{r char_vec}
-
-char_vec <- c(LETTERS[1:10])
-```
-
-Below is a (length-10) factor vector.
-
-```{r fac_vec}
-
-fac_vec <- factor(c(LETTERS[1:10]))
-```
-
-Below is a dataframe containing all four vectors.
-
-```{r dataframe}
-
-df <- data.frame(rand_samp, log_vec, char_vec, fac_vec)
-```
-
 Below is the mean of each variable in the dataframe (prob1_df).
 
 ```{r means}
 
-mean_rand_samp <- mean(rand_samp)
-mean_log_vec <- mean(log_vec)
-mean_char_vec <- mean(char_vec)
-mean_fac_vec <- mean(fac_vec)
+mean_rand_samp <- mean(prob1_df$rand_samp)
+mean_log_vec <- mean(prob1_df$log_vec)
+mean_char_vec <- mean(prob1_df$char_vec)
+mean_fac_vec <- mean(prob1_df$fac_vec)
 ```
 
 After taking the mean of each variable in my dataframe, it is evident that mean_rand_samp and mean_log_vec works because the arguments are numeric whereas mean_char_vec and mean_fac_vec are not.
@@ -76,10 +41,10 @@ Bellow is a code chunk that applies the as.numeric function to the logical, char
 
 ```{r convert_to_num, eval = FALSE}
 
-as.numeric(rand_samp)
-as.numeric(log_vec)
-as.numeric(char_vec)
-as.numeric(fac_vec)
+as.numeric(prob1_df$rand_samp)
+as.numeric(prob1_df$log_vec)
+as.numeric(prob1_df$char_vec)
+as.numeric(prob1_df$fac_vec)
 ```
 
 It is not possible to convert a character variable to a numeric vector which is why the output is NA for "as.numeric(char_vec)". It is possible to convert a factor vector to a numeric vector because the factor vector are categorical variables that assigns an integer to every unique level of a factor vector.
@@ -88,10 +53,10 @@ In this code chunk, the character variable (char_vec) is converted from characte
 
 ```{r convert_char_fac}
 
-char_to_fac <- as.factor(char_vec)
+char_to_fac <- as.factor(prob1_df$char_vec)
 as.numeric(char_to_fac)
 
-fac_to_char <- as.character(fac_vec)
+fac_to_char <- as.character(prob1_df$fac_vec)
 as.numeric(fac_to_char)
 ```
 
@@ -106,44 +71,44 @@ Below is a dataframe for Problem 2:
 library(tidyverse)
 
 prob2_df = tibble(
-  x <- rnorm(1000),
-  y <- rnorm(1000),
-  log_vec <- (x + y > 0),
-  num_vec <- as.numeric(log_vec),
-  fac_vec <- as.factor(num_vec)
+  x = rnorm(1000),
+  y = rnorm(1000),
+  log_vec2 = (x + y > 0),
+  num_vec2 = as.numeric(log_vec2),
+  fac_vec2 = as.factor(num_vec2)
 )
 ```
 
-Write a short description of your vector using inline R code, including: * the size of the dataset * the mean and median of x * the proportion of cases for which the logical vector is TRUE
+My factor vector created above has `r length(prob2_df$fac_vec2)`, a mean of `r mean(prob2_df$x)`, a median of `median(prob2_df$x)`, and a proportion of cases `r mean(prob2_df$log_vec2)`.
 
 Below is a scatterplot of x and y that colors the points based on the logical variable:
   
 ```{r sp_log_vec}
 
 ggplot(prob2_df, aes(x = x, y = y)) +
-  geom_point(aes(color = log_vec))
+  geom_point(aes(color = prob2_df$log_vec2))
 ```
-The red points are the x and y values that do not meet the log_vec statement (FALSE) whereas the blue points are the x and y values that do meet the log_vec statement (TRUE).
+
+The red points are the x and y values that do not meet the log_vec2 statement (FALSE) whereas the blue points are the x and y values that do meet the log_vec2 statement (TRUE).
 
 Below is a scatterplot of x and y that colors the points based on the numeric variable:
   
 ```{r sp_num_vec}
 
 ggplot(prob2_df, aes(x = x, y = y)) +
-  geom_point(aes(color = num_vec))
+  geom_point(aes(color = prob2_df$num_vec2))
 ```
-The dark blue points represent the points when num_vec = 0 (FALSE) and the light blue point represent the values in which num_vec = 1 (TRUE).
+The dark blue points represent the points when num_vec2 = 0 (FALSE) and the light blue point represent the values in which num_vec2 = 1 (TRUE).
 
 Below is a scatterplot of x and y that colors the points based on the factor variable: 
   
 ```{r sp_fac_vec}
 
 ggplot(prob2_df, aes(x = x, y = y)) +
-  geom_point(aes(color = fac_vec))
+  geom_point(aes(color = prob2_df$fac_vec2))
 ```
-The blue points represent when fac_vec = 1 and the red points represent when fac_vec = 0. This scale is different from the numeric scatterplot (sp_num_vec) because there are only a set of values that fac_vec can take (in this case, 0 or 1) whereas there are an infinite number of values that a numeric vector can take.
+The blue points represent when fac_vec2 = 1 and the red points represent when fac_vec2 = 0. This scale is different from the numeric scatterplot (sp_num_vec) because there are only a set of values that fac_vec can take (in this case, 0 or 1) whereas there are an infinite number of values that a numeric vector can take.
 
-Exporting the first scatterplot (sp_log_vec) to your project directory.
-
-`ggsave("scatter_plot.pdf", height = 4, width = 6)`
-
+Exporting the first scatterplot (sp_log_vec) to my project directory.
+#HOW DOES THIS KNOW TO DO THE FIRST SCATTER PLOT?
+`ggsave("scatterplot_log_vec.pdf", height = 4, width = 6)`

@@ -1,0 +1,123 @@
+Homework 1
+================
+
+Sept 21, 2018
+=============
+
+Francois Ban
+============
+
+Problem 1
+---------
+
+Below is a dataframe containing four different vectors:
+
+``` r
+prob1_df = tibble(
+  rand_samp = runif(10, min = 0, max = 5),
+  log_vec = rand_samp > 2,
+  char_vec = LETTERS[1:10],
+  fac_vec = factor(LETTERS[1:10])
+)
+```
+
+Below is the mean of each variable in the dataframe (prob1\_df).
+
+``` r
+mean_rand_samp <- mean(prob1_df$rand_samp)
+mean_log_vec <- mean(prob1_df$log_vec)
+mean_char_vec <- mean(prob1_df$char_vec)
+```
+
+    ## Warning in mean.default(prob1_df$char_vec): argument is not numeric or
+    ## logical: returning NA
+
+``` r
+mean_fac_vec <- mean(prob1_df$fac_vec)
+```
+
+    ## Warning in mean.default(prob1_df$fac_vec): argument is not numeric or
+    ## logical: returning NA
+
+After taking the mean of each variable in my dataframe, it is evident that mean\_rand\_samp and mean\_log\_vec works because the arguments are numeric whereas mean\_char\_vec and mean\_fac\_vec are not.
+
+Bellow is a code chunk that applies the as.numeric function to the logical, character, and factor variables.
+
+``` r
+as.numeric(prob1_df$rand_samp)
+as.numeric(prob1_df$log_vec)
+as.numeric(prob1_df$char_vec)
+as.numeric(prob1_df$fac_vec)
+```
+
+It is not possible to convert a character variable to a numeric vector which is why the output is NA for "as.numeric(char\_vec)". It is possible to convert a factor vector to a numeric vector because the factor vector are categorical variables that assigns an integer to every unique level of a factor vector.
+
+In this code chunk, the character variable (char\_vec) is converted from character to factor to numeric; similarly, convert my factor variable (fac\_vec) is converted from factor to character to numeric.
+
+``` r
+char_to_fac <- as.factor(prob1_df$char_vec)
+as.numeric(char_to_fac)
+```
+
+    ##  [1]  1  2  3  4  5  6  7  8  9 10
+
+``` r
+fac_to_char <- as.character(prob1_df$fac_vec)
+as.numeric(fac_to_char)
+```
+
+    ## Warning: NAs introduced by coercion
+
+    ##  [1] NA NA NA NA NA NA NA NA NA NA
+
+It is possible to convert a character vector to a factor vector to a numeric vector but it is not possible to convert a factor vector to a character vector to a numeric vector.
+
+Problem 2
+---------
+
+Below is a dataframe for Problem 2:
+
+``` r
+library(tidyverse)
+
+prob2_df = tibble(
+  x = rnorm(1000),
+  y = rnorm(1000),
+  log_vec2 = (x + y > 0),
+  num_vec2 = as.numeric(log_vec2),
+  fac_vec2 = as.factor(num_vec2)
+)
+```
+
+My factor vector created above has 1000, a mean of -0.013491, a median of `median(prob2_df$x)`, and a proportion of cases 0.501.
+
+Below is a scatterplot of x and y that colors the points based on the logical variable:
+
+``` r
+ggplot(prob2_df, aes(x = x, y = y)) +
+  geom_point(aes(color = prob2_df$log_vec2))
+```
+
+![](HW1_files/figure-markdown_github/sp_log_vec-1.png)
+
+The red points are the x and y values that do not meet the log\_vec2 statement (FALSE) whereas the blue points are the x and y values that do meet the log\_vec2 statement (TRUE).
+
+Below is a scatterplot of x and y that colors the points based on the numeric variable:
+
+``` r
+ggplot(prob2_df, aes(x = x, y = y)) +
+  geom_point(aes(color = prob2_df$num_vec2))
+```
+
+![](HW1_files/figure-markdown_github/sp_num_vec-1.png) The dark blue points represent the points when num\_vec2 = 0 (FALSE) and the light blue point represent the values in which num\_vec2 = 1 (TRUE).
+
+Below is a scatterplot of x and y that colors the points based on the factor variable:
+
+``` r
+ggplot(prob2_df, aes(x = x, y = y)) +
+  geom_point(aes(color = prob2_df$fac_vec2))
+```
+
+![](HW1_files/figure-markdown_github/sp_fac_vec-1.png) The blue points represent when fac\_vec2 = 1 and the red points represent when fac\_vec2 = 0. This scale is different from the numeric scatterplot (sp\_num\_vec) because there are only a set of values that fac\_vec can take (in this case, 0 or 1) whereas there are an infinite number of values that a numeric vector can take.
+
+Exporting the first scatterplot (sp\_log\_vec) to my project directory. \#HOW DOES THIS KNOW TO DO THE FIRST SCATTER PLOT? `ggsave("scatterplot_log_vec.pdf", height = 4, width = 6)`
