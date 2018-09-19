@@ -10,6 +10,8 @@ output: github_document
 
 ```{r loading_tidyverse, include = FALSE}
 library(tidyverse)
+
+set.seed(1)
 ```
 
 Below is a dataframe containing four different vectors:
@@ -66,7 +68,7 @@ Below is a dataframe for Problem 2:
   
 ```{r prob2_df}
 
-library(tidyverse)
+set.seed(1)
 
 prob2_df = tibble(
   x = rnorm(1000),
@@ -77,7 +79,7 @@ prob2_df = tibble(
 )
 ```
 
-My factor vector created above has `r length(prob2_df$fac_vec)`, a mean of `r mean(prob2_df$x)`, a median of `median(prob2_df$x)`, and a proportion of cases `r mean(prob2_df$log_vec)`.
+My vector created above has a dataset size of `r length(prob2_df)`, a mean of `r mean(prob2_df$x)`, a median of `r median(prob2_df$x)`, and a proportion of cases `r mean(prob2_df$log_vec)`.
 
 Below is a scatterplot of x and y that colors the points based on the logical variable:
   
@@ -110,7 +112,7 @@ plot_3
 ```
 The blue points represent when fac_vec = TRUE and the red points represent when fac_vec = FALSE. This scale is different from the numeric scatterplot (sp_num_vec) because there are only a set of values that fac_vec can take (in this case, TRUE or FALSE) whereas there are an infinite number of values that a numeric vector can take.
 
-Exporting the first scatterplot (sp_log_vec) to my project directory.
+Exporting the first scatterplot (plot_1) to my project directory.
 
 ```{r}
 ggsave("scatterplot_log_vec.pdf", plot = plot_1, height = 4, width = 6)

@@ -76,7 +76,7 @@ It is possible to convert a character vector to a factor vector to a numeric vec
 Below is a dataframe for Problem 2:
 
 ``` r
-library(tidyverse)
+set.seed(1)
 
 prob2_df = tibble(
   x = rnorm(1000),
@@ -87,7 +87,7 @@ prob2_df = tibble(
 )
 ```
 
-My factor vector created above has 1000, a mean of 0.0158068, a median of `median(prob2_df$x)`, and a proportion of cases 0.494.
+My vector created above has a dataset size of 5, a mean of -0.0116481, a median of -0.0353242, and a proportion of cases 0.49.
 
 Below is a scatterplot of x and y that colors the points based on the logical variable:
 
@@ -121,7 +121,7 @@ plot_3
 
 ![](HW1_files/figure-markdown_github/sp_fac_vec-1.png) The blue points represent when fac\_vec = TRUE and the red points represent when fac\_vec = FALSE. This scale is different from the numeric scatterplot (sp\_num\_vec) because there are only a set of values that fac\_vec can take (in this case, TRUE or FALSE) whereas there are an infinite number of values that a numeric vector can take.
 
-Exporting the first scatterplot (sp\_log\_vec) to my project directory.
+Exporting the first scatterplot (plot\_1) to my project directory.
 
 ``` r
 ggsave("scatterplot_log_vec.pdf", plot = plot_1, height = 4, width = 6)
