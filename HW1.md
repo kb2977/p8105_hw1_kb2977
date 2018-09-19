@@ -87,7 +87,7 @@ prob2_df = tibble(
 )
 ```
 
-My vector created above has a dataset size of 5, a mean of -0.0116481, a median of -0.0353242, and a proportion of cases 0.49.
+My vector created above has a dataset size of 5columns and 1000rows, a mean of -0.0116481, a median of -0.0353242, and a proportion of cases 0.49.
 
 Below is a scatterplot of x and y that colors the points based on the logical variable:
 

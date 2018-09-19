@@ -79,7 +79,7 @@ prob2_df = tibble(
 )
 ```
 
-My vector created above has a dataset size of `r length(prob2_df)`, a mean of `r mean(prob2_df$x)`, a median of `r median(prob2_df$x)`, and a proportion of cases `r mean(prob2_df$log_vec)`.
+My vector created above has a dataset size of `r length(prob2_df)` columns and `r length(prob2_df$x)` rows, a mean of `r mean(prob2_df$x)`, a median of `r median(prob2_df$x)`, and a proportion of cases `r mean(prob2_df$log_vec)`.
 
 Below is a scatterplot of x and y that colors the points based on the logical variable:
   
