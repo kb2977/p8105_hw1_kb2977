@@ -3,8 +3,9 @@ title: "Homework 1"
 output: github_document
 ---
 
-##Sept 21, 2018
-##Francois Ban
+Sept 21, 2018
+
+Francois Ban
 
 ###Problem 1
 
@@ -15,6 +16,11 @@ set.seed(1)
 ```
 
 Below is a dataframe containing four different vectors:
+
+A random sample of size 10 from a uniform[0, 5] distribution
+A logical vector indicating whether elements of the sample are greater than 2
+A (length-10) character vector
+A (length-10) factor vector
 
 ```{r prob1_df}
 prob1_df = tibble(
@@ -29,42 +35,47 @@ Below is the mean of each variable in the dataframe (prob1_df).
 
 ```{r means}
 
-mean_rand_samp <- mean(prob1_df$rand_samp)
-mean_log_vec <- mean(prob1_df$log_vec)
-mean_char_vec <- mean(prob1_df$char_vec)
-mean_fac_vec <- mean(prob1_df$fac_vec)
+mean(prob1_df$rand_samp)
+mean(prob1_df$log_vec)
+mean(prob1_df$char_vec)
+mean(prob1_df$fac_vec)
 ```
 
-After taking the mean of each variable in my dataframe, it is evident that mean_rand_samp and mean_log_vec works because the arguments are numeric whereas mean_char_vec and mean_fac_vec are not.
+After taking the mean of each variable in my dataframe, it is evident that we cannot take the mean of character vectors and factor vectors because the arguments are not numeric values.
 
-Bellow is a code chunk that applies the as.numeric function to the logical, character, and factor variables.
+Below is a code chunk that applies the as.numeric function to the logical, character, and factor variables.
 
 ```{r convert_to_num, eval = FALSE}
 
-as.numeric(prob1_df$rand_samp)
 as.numeric(prob1_df$log_vec)
 as.numeric(prob1_df$char_vec)
 as.numeric(prob1_df$fac_vec)
 ```
 
-It is not possible to convert a character variable to a numeric vector which is why the output is NA for "as.numeric(char_vec)". It is possible to convert a factor vector to a numeric vector because the factor vector are categorical variables that assigns an integer to every unique level of a factor vector.
+Converting a character variable to a numeric vector has no mathematical meaning which is why the output is NA for "as.numeric(char_vec)". However, converting a factor vector to a numeric vector is possible because the factor vector has categorical order which is why it can convert to a numeric vector.
 
 In this code chunk, the character variable (char_vec) is converted from character to factor to numeric; similarly, convert my factor variable (fac_vec) is converted from factor to character to numeric.
 
 ```{r convert_char_fac}
 
-char_to_fac <- as.factor(prob1_df$char_vec)
+char_to_fac = as.factor(prob1_df$char_vec)
 as.numeric(char_to_fac)
 
-fac_to_char <- as.character(prob1_df$fac_vec)
+fac_to_char = as.character(prob1_df$fac_vec)
 as.numeric(fac_to_char)
 ```
 
-It is possible to convert a character vector to a factor vector to a numeric vector but it is not possible to convert a factor vector to a character vector to a numeric vector.
+Converting a character vector to a factor vector assigns a numeric category which is why this can turn into a numeric vector. However, when converting factor vector to character vector, there is no numeric significance and therefore outputs NA when changing factor vector to numeric vector.
 
 ###Problem 2
 
 Below is a dataframe for Problem 2:
+
+x: a random sample of size 1000 from a standard Normal distribution
+y: a random sample of size 1000 from a standard Normal distribution
+A logical vector indicating whether the x + y > 0
+A numeric vector created by coercing the above logical vector
+A factor vector created by coercing the above logical vector
   
 ```{r prob2_df}
 
@@ -79,14 +90,14 @@ prob2_df = tibble(
 )
 ```
 
-My vector created above has a dataset size of `r length(prob2_df)` columns and `r length(prob2_df$x)` rows, a mean of `r mean(prob2_df$x)`, a median of `r median(prob2_df$x)`, and a proportion of cases `r mean(prob2_df$log_vec)`.
+My vector created above has a dataset size of `r length(prob2_df)` columns and `r length(prob2_df$x)` rows, a mean of `r mean(prob2_df$x)`, a median of `r median(prob2_df$x)`, and a proportion of cases (i.e. TRUE) as `r mean(prob2_df$log_vec)`.
 
 Below is a scatterplot of x and y that colors the points based on the logical variable:
   
 ```{r sp_log_vec}
 
-plot_1 = ggplot(prob2_df, aes(x = x, y = y)) +
-  geom_point(aes(color = prob2_df$log_vec))
+plot_1 = ggplot(prob2_df, aes(color = log_vec, x = x, y = y)) +
+  geom_point()
 plot_1
 ```
 
@@ -96,8 +107,8 @@ Below is a scatterplot of x and y that colors the points based on the numeric va
   
 ```{r sp_num_vec}
 
-plot_2 = ggplot(prob2_df, aes(x = x, y = y)) +
-  geom_point(aes(color = prob2_df$num_vec))
+plot_2 = ggplot(prob2_df, aes(color = num_vec, x = x, y = y)) +
+  geom_point()
 plot_2
 ```
 The dark blue points represent the points when num_vec = 0 (FALSE) and the light blue point represent the values in which num_vec = 1 (TRUE).
@@ -106,14 +117,15 @@ Below is a scatterplot of x and y that colors the points based on the factor var
   
 ```{r sp_fac_vec}
 
-plot_3 = ggplot(prob2_df, aes(x = x, y = y)) +
-  geom_point(aes(color = prob2_df$fac_vec,))
+plot_3 = ggplot(prob2_df, aes(color = fac_vec, x = x, y = y)) +
+  geom_point()
 plot_3
 ```
+
 The blue points represent when fac_vec = TRUE and the red points represent when fac_vec = FALSE. This scale is different from the numeric scatterplot (sp_num_vec) because there are only a set of values that fac_vec can take (in this case, TRUE or FALSE) whereas there are an infinite number of values that a numeric vector can take.
 
 Exporting the first scatterplot (plot_1) to my project directory.
 
-```{r}
+```{r saving_plot1}
 ggsave("scatterplot_log_vec.pdf", plot = plot_1, height = 4, width = 6)
 ```
